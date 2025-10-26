@@ -1,0 +1,28 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+
+        // key - значение в массиве, value - количество повторений в масиве
+        Map<Integer, Integer> countMap = new HashMap<>();
+
+        // просто перебираем масив (распихиваем в countMap)
+        for (int i = 0; i < nums.length; i++){
+            int num = nums[i];
+            countMap.put(num, countMap.getOrDefault(num, 0)+1);
+        }
+
+        // результат
+        int result = nums[0];
+        // максимальное количество повторений (для result)
+        int maxCount = 0;
+        
+        // перебор значений, если количество повторений больше, записываем в result и maxCount 
+        for(Map.Entry<Integer, Integer> entry : countMap.entrySet()){
+            if (entry.getValue() > maxCount){
+                result = entry.getKey();
+                maxCount = entry.getValue();
+            }
+        }
+        
+        return result;
+    }
+}

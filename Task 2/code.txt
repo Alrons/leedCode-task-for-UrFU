@@ -1,0 +1,17 @@
+class Solution {
+    // если анаграмма (анаграмма это слова с одинаковыми буквами, но разным порядком их постановления)
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
+
+        // переводим в масив символов
+        char[] sChars = s.toCharArray();
+        char[] tChars = t.toCharArray();
+
+        // сортируем
+        Arrays.sort(sChars);
+        Arrays.sort(tChars);
+
+        // сравниваем
+        return Arrays.equals(sChars, tChars);
+    } 
+}

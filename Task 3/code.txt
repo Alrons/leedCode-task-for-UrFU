@@ -1,0 +1,20 @@
+class Solution {
+    // убираем дубликаты из массива чисел. Пример: Input
+    //nums = [0,0,1,1,1,2,2,3,3,4]
+    //Output
+    //[0,1,2,3,4]
+    //Expected
+    //[0,1,2,3,4]
+    public int removeDuplicates(int[] nums) {
+        if (nums.length == 0) return 0;
+    
+    int uniqueIndex = 0; // индекс для уникальных элементов
+    for(int i = 1; i<nums.length; i++){
+        if(nums[i] != nums[uniqueIndex]){
+            uniqueIndex++;
+            nums[uniqueIndex] = nums[i];
+        }
+    }
+    return uniqueIndex + 1; // возвращаем новую длину
+    }
+}
