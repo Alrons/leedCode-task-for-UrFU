@@ -1,0 +1,21 @@
+class Solution {
+    public int[] getSneakyNumbers(int[] nums) {
+        Set<Integer> numCount = new HashSet<Integer>();
+        int[] result = new int[2];
+        int resultIndex = 0; 
+
+        for(int i = 0; i < nums.length; i++){
+            int num = nums[i];
+            if(numCount.contains(num)){
+                result[resultIndex] = num;
+                resultIndex++;
+
+                if (resultIndex == 2){
+                    return result;
+                }
+            }
+            numCount.add(num);
+        }
+        return result;
+    }
+}
