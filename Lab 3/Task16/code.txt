@@ -1,0 +1,16 @@
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int currentIndex = 0;
+        // все числа не равные нулю переносим в начало
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] != 0){
+                nums[currentIndex] = nums[i];
+                currentIndex++;
+            }
+        }
+        // оставшиеся заполняем нулями
+        for (int i = currentIndex; i < nums.length; i++ ){
+            nums[i] = 0;
+        }
+    }
+}
