@@ -1,0 +1,41 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        
+        // Шаг 1: Находим позицию i (справа налево) где nums[i] < nums[i+1]
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+        
+        // Если весь массив в убывающем порядке - делаем reverse
+        if (i < 0) {
+            revers(nums, 0);
+            return;
+        }
+        
+        // Шаг 2: Находим наименьшее число справа от i, которое БОЛЬШЕ nums[i]
+        int j = nums.length - 1;
+        while (j > i && nums[j] <= nums[i]) {
+            j--;
+        }
+        
+        // Шаг 3: Меняем местами nums[i] и nums[j]
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+        
+        // Шаг 4: Переворачиваем часть массива после i
+        revers(nums, i + 1);
+    }
+    
+    public void revers(int[] nums, int start) {
+        int end = nums.length - 1;
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+}

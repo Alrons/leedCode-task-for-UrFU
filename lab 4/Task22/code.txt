@@ -1,0 +1,35 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        
+    StringBuilder result = new StringBuilder();
+    int i = a.length() - 1;  // Указатель на последнюю цифру строки a
+    int j = b.length() - 1;  // Указатель на последнюю цифру строки b
+    int carry = 0;           // Перенос (0 или 1)
+    
+    // Продолжаем, пока есть цифры или перенос
+    while (i >= 0 || j >= 0 || carry > 0) {
+        int sum = carry;  // Начинаем с переноса
+        
+        // Добавляем цифру из a, если она есть
+        if (i >= 0) {
+            sum += a.charAt(i) - '0';  // '0'→0, '1'→1
+            i--;
+        }
+        
+        // Добавляем цифру из b, если она есть
+        if (j >= 0) {
+            sum += b.charAt(j) - '0';  // '0'→0, '1'→1
+            j--;
+        }
+        
+        // Текущий бит = остаток от деления на 2
+        result.append(sum % 2);
+        // Перенос = целая часть от деления на 2
+        carry = sum / 2;
+    }
+    
+    // Разворачиваем, т.к. добавляли с конца
+    return result.reverse().toString();
+
+    }
+}
