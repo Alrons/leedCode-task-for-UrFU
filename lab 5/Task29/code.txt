@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isHappy(int n) {
+        if (n == 1){
+            return true;
+        }
+        HashSet<Integer> seen = new HashSet<>();
+
+        while (n != 1) {
+            if (seen.contains(n)) {
+                return false; // Нашли цикл, число несчастливое
+            }
+            seen.add(n);
+            n = sumOfSquaredDigits(n);
+        }
+
+        return true; // Достигли 1, число счастливое
+
+    }
+
+    public static int sumOfSquaredDigits(int num) {
+    int sum = 0;
+    while (num > 0) {
+        int digit = num % 10;       // Получаем последнюю цифру
+        sum += digit * digit;       // Добавляем квадрат цифры к сумме
+        num = num / 10;             // Убираем последнюю цифру
+    }
+    return sum;
+}
+}
