@@ -1,0 +1,32 @@
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        // Ранний выход, если длина недостаточна
+        if (ransomNote.length() > magazine.length()) {
+            return false;
+        }
+
+        // Массив для хранения количества каждой буквы (от 'a' до 'z')
+        // Индекс 0 соответствует 'a', 1 к 'b' и т.д.
+        int[] counts = new int[26];
+
+        // 1. Заполняем массив, считая буквы в magazine
+        for (char c : magazine.toCharArray()) {
+            counts[c - 'a']++; // 'c' - 'a' дает индекс (например, 'b' - 'a' = 1)
+        }
+
+        // 2. Проверяем буквы из ransomNote
+        for (char c : ransomNote.toCharArray()) {
+            int index = c - 'a';
+            // Если счетчик для этой буквы уже 0, значит, в magazine ее не хватает
+            if (counts[index] == 0) {
+                return false;
+            }
+            // Уменьшаем счетчик
+            counts[index]--;
+        }
+
+        // Если все буквы найдены и их достаточно, возвращаем true
+        return true;
+
+        }
+    }
