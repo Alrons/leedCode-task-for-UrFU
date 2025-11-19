@@ -1,0 +1,15 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+       int sSumm = 0;
+       int tSumm = 0;
+
+       for (char sChar : s.toCharArray()){
+            sSumm += sChar;
+       }
+       for (char tChar : t.toCharArray()){
+            tSumm += tChar;
+       }
+        char result = (char)(tSumm - sSumm);
+       return result;
+    }
+}
