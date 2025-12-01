@@ -1,0 +1,53 @@
+class Solution {
+    public int minSubarray(int[] nums, int p) {
+        long sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        if (sum < p)
+            return -1;
+        long target = sum % p;
+        if (target == 0)
+            return 0;
+        HashMap<Integer, Integer> HM = new HashMap<>();
+        HM.put(0, -1);
+        sum = 0;
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+        // Небольшая оптимизация: Если отдельный элемент уже дает нужный остаток,
+        // то минимальная длина - 1 (так как 1 < Integer.MAX_VALUE).
+        if (nums[i] % p == target)
+            return 1;
+
+        // Обновляем текущую префиксную сумму.
+        sum += nums[i];
+
+        // a = P[i]. Остаток текущей префиксной суммы S[0..i] по модулю P.
+        int a = (int) (sum % p);
+
+        // b = P[j]. Вычисляем остаток, который должен был встретиться раньше (на индексе j).
+        // P[j] = (P[i] - target) mod P.
+        int b = (int) ((sum - target) % p);
+
+        // Исправление для обеспечения неотрицательности в модульной арифметике,
+        // так как оператор % в Java может возвращать отрицательные числа.
+        if (b < 0) { 
+            b += p; 
+        }
+
+        // Если требуемый остаток P[j] (b) найден в HashMap:
+        if (HM.containsKey(b))
+            // Мы нашли подмассив nums[j+1..i], который нам нужен.
+            // Длина этого подмассива: i - j. Обновляем минимальную длину.
+            res = Math.min(i - HM.get(b), res);
+
+        // Сохраняем (или обновляем) текущий остаток P[i] (a) и его индекс i.
+        // Если остаток P[i] уже есть, мы его перезаписываем, так как нам нужен самый большой i
+        // (для получения наименьшей длины i - j).
+        HM.put(a, i);
+        }
+        if (res >= nums.length)
+            return -1;
+        return res;
+    }
+}
