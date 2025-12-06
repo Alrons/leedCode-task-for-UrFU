@@ -1,0 +1,34 @@
+class Solution {
+    public List<String> readBinaryWatch(int turnedOn) {
+        List<String> res = new ArrayList<>();
+        int Hour = 0;
+        int Minute = 0;
+        
+        possibleTimes(res, Hour, Minute, turnedOn);
+
+        return res;
+    }
+
+    public void possibleTimes(List<String> result, int hour, int minute, int turnedOn){
+        if(Integer.bitCount(hour) + Integer.bitCount(minute) == turnedOn){
+                    if(minute<10){
+                        result.add(String.format("%d:0%d",hour,minute));
+                    } 
+                    else {
+                        result.add(String.format("%d:%d",hour,minute));
+                    }
+        }
+        if(minute != 59){
+            minute++;
+            possibleTimes(result, hour, minute, turnedOn);
+        }
+        else if (hour != 11){
+            minute = 0;
+            hour++;
+            possibleTimes(result, hour, minute, turnedOn);
+        }
+        else {
+            return;
+        }
+    }
+}

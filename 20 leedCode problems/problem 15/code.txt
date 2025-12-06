@@ -1,0 +1,21 @@
+class Solution {
+    public int countPartitions(int[] nums) {
+        int res = 0;
+        int leftSumm = 0;
+        int rightSumm = 0;
+        for(int i = 0; i < nums.length; i++){
+            rightSumm += nums[i];
+        }
+
+        leftSumm = nums[0];
+        rightSumm -= nums[0];
+        for(int i = 1; i < nums.length; i++){
+            if((leftSumm - rightSumm) % 2 == 0){
+                res++;
+            }
+            leftSumm += nums[i];
+            rightSumm -= nums[i];
+        }
+        return res;
+    }
+}

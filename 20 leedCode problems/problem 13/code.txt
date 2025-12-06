@@ -1,0 +1,43 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1 == null){
+            return list2;
+        }
+        if(list2 == null){
+            return list1;
+        }
+        ListNode res = new ListNode(0);
+        ListNode indexRes = res;
+        addingNode(indexRes, list1, list2);
+
+        return res.next;
+        
+    } // я просто хочу поизучать рекуксию. Я видел примеры с while и знаю что так быстрее (и лучше). Но так для меня веселее
+    public void addingNode(ListNode indexRes, ListNode list1, ListNode list2){
+        if (list1 == null) {
+            indexRes.next = list2;
+            return;
+        }
+        if (list2 == null) {
+            indexRes.next = list1;
+            return;
+        }
+        if (list1.val <= list2.val) {
+            indexRes.next = list1;
+            addingNode(indexRes.next, list1.next, list2);
+        } else {
+            indexRes.next = list2;
+            addingNode(indexRes.next, list1, list2.next);
+        }
+    }
+}

@@ -1,0 +1,6 @@
+class Solution {
+    // я думаю что это самая легкая задачка
+    public boolean canWinNim(int n) {
+        return !(n%4 == 0);
+    }
+}
